@@ -72,7 +72,7 @@ params.mothur_prefix = 'hehe'
 //          .stripIndent()
 if (params.reads_mode == 'mixed') {
     pre_process = """
-    make.contigs(ffastq=$baseDir/$params.ffastq, rfastq=$baseDir/$params.rfastq, oligos=$baseDir/$params.oligo, pdiffs=6, bdiffs=1, checkorient=t, processors=56)
+    make.contigs(ffastq=$params.ffastq, rfastq=$params.rfastq, oligos=$params.oligo, pdiffs=6, bdiffs=1, checkorient=t, processors=56)
     set.dir(input=${file(params.ffastq).getParent()}, output=mothur_temp)
     """
     params.mothur_prefix = file(params.ffastq).getBaseName()
