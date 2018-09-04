@@ -1,0 +1,11 @@
+primer	GTGCCAGCMGCCGCGGTAA	CCCCGYCAATTCMTTTRAGT	
+barcode	TCATCGAG 	CTAGCTCG	1Csoil
+barcode	TCATCGAG	CTCTAGAG	1Dsoil 
+barcode	TCATCGAG	GAGCTCAT	1Esoil
+barcode	TCATCGAG	GGTATGCT	1Fsoil
+barcode	TCATCGAG	GTATGACG	1Gsoil
+barcode GGATATCT    AAGTCGAG    Cofyuling
+barcode GGATATCT    ATACTTCG    Dofyuling
+barcode GGATATCT    AGCTGCTA    Eofyuling
+barcode GGATATCT    CATAGAGA    Fofyuling
+barcode CGTGAGTG    ATACTTCG    Gofyuling
