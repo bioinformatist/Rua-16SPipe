@@ -2,6 +2,9 @@
 
 Rua-16SPipe是一个基于[Nextflow](https://www.nextflow.io/)的16S扩增子测序数据分析流程，尚在建设中。
 
+> Rua！我是小僵尸我自豪！
+> 别说了，枫哥不喜欢。
+
 ## 示例数据
 
 目前，Rua-16SPipe允许两种类型的输入文件，分别有对应的[示例数据](data)：
@@ -19,7 +22,7 @@ rename fastq. "" *0.02*
 
 2. [Demuxed的数据](data/demuxed)：
 
-[数据](data/demuxed)来源于(*acc number和ref待补充*)，经过[SeqKit](https://github.com/shenwei356/seqkit)作如下处理：
+数据来源于(*acc number和ref待补充*)，经过[SeqKit](https://github.com/shenwei356/seqkit)作如下处理：
 
 ```shell
 # 对所有fastq文件使用SeqKit抽样2%的reads
@@ -28,7 +31,7 @@ for x in *.fastq; do seqkit sample $x -p 0.02 -o $x.0.02.fastq; done
 rename fastq. "" *0.02*
 ```
 
-由于SeqKit默认有固定的random seed，因此对于双端顺序一致的数据，是可以这样取得可用子集的。
+由于SeqKit默认有固定的random seed，因此对于双端顺序一致的数据，是可以这样取得序列名称配对完整的可用子集的。
 
 > 插播一条广告：[SeqKit](https://github.com/shenwei356/seqkit)是由作者的[小伙伴](https://github.com/shenwei356)使用Go语言开发的，快到你根本感受不到时间的流逝，欢迎踊跃下载试用。
 
@@ -56,7 +59,7 @@ Downloading nextflow dependencies. It may require a few seconds, please wait ..
 ERROR: Cannot download nextflow required file -- make sure you can connect to the internet
 ```
 
-**请去马路边强行扶老奶奶过几次马路（过来过去），并小心不要碰倒她。然后回来重试直到成功为止。**
+这说明你的人品出现了问题。**请去马路边强行扶老奶奶过几次马路（过来过去），并小心不要将她碰到在地。如果她强行摔倒，请转身快速跑掉。然后回来电脑旁重试，直到成功为止。**
 
 > 开始使用之前请注意：暂时请使用相对路径（终端内使用`pwd`可以查看工作目录）指定输入文件（目录）的位置。作者在v0.1.0会解决这个问题。
 
