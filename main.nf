@@ -78,7 +78,7 @@ if (params.reads_mode == 'mixed') {
     //     .into {ffastq_ch, rfastq_ch, oligo_ch}
 
     pre_process = """
-    make.contigs(ffastq=$workDir/$params.ffastq, rfastq=$workDir/$params.rfastq, oligos=../../../../$params.oligo, pdiffs=6, bdiffs=1, checkorient=t, processors=56)
+    make.contigs(ffastq=$launchDir/$params.ffastq, rfastq=$launchDir/$params.rfastq, oligos=$launchDir/$params.oligo, pdiffs=6, bdiffs=1, checkorient=t, processors=56)
     set.dir(input=${file(params.ffastq).getParent()}, output=mothur_temp)
     """
     params.mothur_prefix = file(params.ffastq).getBaseName()
@@ -87,9 +87,9 @@ if (params.reads_mode == 'mixed') {
 
 if (params.reads_mode == 'demuxed') {
     pre_process = """
-    make.file(inputdir=$baseDir/$params.inputdir, type=fastq, prefix=$params.mothur_prefix)
+    make.file(inputdir=$launchDir/$params.inputdir, type=fastq, prefix=$params.mothur_prefix)
     make.contigs(file=${params.mothur_prefix}.files, checkorient=t, processors=50)
-    set.dir(input=$baseDir/$params.inputdir, output=mothur_temp)
+    set.dir(input=$launchDir/$params.inputdir, output=mothur_temp)
     """
 }
 
