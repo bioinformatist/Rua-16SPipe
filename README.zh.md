@@ -82,3 +82,7 @@ nextflow run bioinformatist/Rua-16SPipe --reads_mode demuxed --inputdir data/dem
 ## 运行结果
 
 程序运行结束后，当前目录下会出现一个results目录，保存了所有结果。
+
+## 建议与反馈
+
+使用过程中遇到任何问题，或者要求增加功能特性等，请[留言](https://github.com/bioinformatist/Rua-16SPipe/issues) (English is better)。
