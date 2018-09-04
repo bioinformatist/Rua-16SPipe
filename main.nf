@@ -47,7 +47,7 @@ params.silva_align = "$baseDir/dbs/silva.nr_v132.align"
 params.silva_tax = "$baseDir/dbs/silva.nr_v132.tax"
 params.silva_subset = "$baseDir/dbs/silva.v45.fasta"
 params.outdir = 'results'
-params.mothur_prefix = 'hehe'
+// params.mothur_prefix = 'hehe'
 
 // log.info """\
 

@@ -63,6 +63,10 @@ ERROR: Cannot download nextflow required file -- make sure you can connect to th
 
 > 开始使用之前请注意：暂时请使用相对路径（终端内使用`pwd`可以查看工作目录）指定输入文件（目录）的位置。作者在v0.1.0会解决这个问题。
 
+### 获取最新的流程
+
+Rua-16SPipe还在活跃开发中。请在每次使用之前运行`nextflow pull bioinformatist/Rua-16SPipe`来获取最新版本。
+
 ### 对于混样数据
 
 命令行参数举例：
