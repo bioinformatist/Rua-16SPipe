@@ -43,9 +43,9 @@
 // }
 
 // params.inputdir = "$baseDir/data/mixed"
-params.silva_align = "$workflow.launchDir/dbs/silva.nr_v132.align"
-params.silva_tax = "$workflow.launchDir/dbs/silva.nr_v132.tax"
-params.silva_subset = "$workflow.launchDir/dbs/silva.v45.fasta"
+db_align = "$workflow.launchDir/params.db_align"
+db_tax = "$workflow.launchDir/params.db_tax"
+db_subset = "$workflow.launchDir/params.db_subset"
 params.outdir = 'results'
 // params.mothur_prefix = 'hehe'
 
@@ -109,12 +109,12 @@ process oneNoodlesDragon {
     $pre_process
     summary.seqs(fasta=${params.mothur_prefix}.trim.contigs.fasta)
 
-    screen.seqs(fasta=${params.mothur_prefix}.trim.contigs.fasta, group=${params.mothur_prefix}.contigs.groups, summary=${params.mothur_prefix}.trim.contigs.summary, optimize=minlength-maxlength, maxambig=0, criteria=97.5)
+    screen.seqs(fasta=${params.mothur_prefix}.trim.contigs.fasta, group=${params.mothur_prefix}.contigs.groups, summary=${params.mothur_prefix}.trim.contigs.summary, optimize=maxlength, maxambig=0, criteria=97.5)
     summary.seqs()
     unique.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.fasta)
     count.seqs(name=${params.mothur_prefix}.trim.contigs.good.names, group=${params.mothur_prefix}.contigs.good.groups)
     summary.seqs(count=${params.mothur_prefix}.trim.contigs.good.count_table)
-    align.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.fasta, reference=$params.silva_subset)
+    align.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.fasta, reference=$db_subset)
     summary.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.align, count=${params.mothur_prefix}.trim.contigs.good.count_table)
 
     screen.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.align, count=${params.mothur_prefix}.trim.contigs.good.count_table, summary=${params.mothur_prefix}.trim.contigs.good.unique.summary, optimize=start-end, criteria=97.5, maxhomop=8, processors=50)
@@ -125,7 +125,7 @@ process oneNoodlesDragon {
     chimera.vsearch(fasta=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.count_table, dereplicate=t)
     remove.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.fasta, accnos=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.accnos)
     summary.seqs(fasta=current, count=current)
-    classify.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, reference=$params.silva_align, taxonomy=$params.silva_tax, cutoff=80, iters=1000)
+    classify.seqs(fasta=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, reference=$db_align, taxonomy=$db_tax, cutoff=80, iters=1000)
     remove.lineage(fasta=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.count_table, taxonomy=${params.mothur_prefix}.trim.contigs.good.unique.good.filter.unique.precluster.pick.nr_v132.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Eukaryota)
     summary.tax(taxonomy=current, count=current)
         

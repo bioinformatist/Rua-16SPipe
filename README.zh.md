@@ -72,7 +72,7 @@ Rua-16SPipe还在活跃开发中。请在每次使用之前运行`nextflow pull 
 命令行参数举例：
 
 ```shell
-nextflow run bioinformatist/Rua-16SPipe --reads_mode mixed --ffastq data/mixed/SRR5834618_1.0.02.fastq --rfastq data/mixed/SRR5834618_2.0.02.fastq --oligo data/mixed/oligos_yu.txt
+nextflow run bioinformatist/Rua-16SPipe --reads_mode mixed --ffastq data/mixed/SRR5834618_1.0.02.fastq --rfastq data/mixed/SRR5834618_2.0.02.fastq --oligo data/mixed/oligos_yu.txt --db_align gg_13_8_99.refalign --db_tax gg_13_8_99.gg.tax --db_subset gg.v45.fasta
 ```
 
 ### 对于demuxed数据
