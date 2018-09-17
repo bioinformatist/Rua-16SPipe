@@ -149,6 +149,7 @@ process makeBiom {
     output:
 
     file 'final.opti_mcc.0.03.biom' into biom_file
+    file 'final.opti_mcc.0.03.biom' into 'final.biom'
 
     """
     mothur "#make.biom(shared=$shared_file, constaxonomy=$tax_file)"
@@ -185,14 +186,31 @@ process rPart {
     output:
 
     file "Genus.RA.xlsx"
+    file "observed.VS.rarefiled.png"
+    file "rarecurve.pdf"
 
     """
     #!/usr/bin/env Rscript
     library(phyloseq)
     library(xlsx)
     library(dplyr)
+    library(vegan)
     mothur.data <- import_mothur(mothur_shared_file = '$shared_file', mothur_constaxonomy_file = '$tax_file')
     colnames(tax_table(mothur.data)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus")
+    aba <- data.table(t(otu_table(mothur.data)))
+    S <- specnumber(aba)
+    raremax <- min(rowSums(aba))
+    Srare <- rarefy(aba, raremax)
+    png('observed.VS.rarefiled.png')
+    plot(S, Srare, xlab = "Observed No. of Species", ylab = "Rarefied No. of Species")
+    abline(0, 1)
+    dev.off()
+    set.seed(1031)
+    col.distinct <- colors(distinct = TRUE)
+    col.rare <- sample(col.distinct, length(S))
+    pdf('rarecurve.pdf')
+    rarecurve(aba, step = 20, sample = raremax, col = "blue", cex = 0.6)
+    dev.off()
     RA <- mothur.data %>%  transform_sample_counts(function(x) {x/sum(x)} ) %>% filter_taxa(function(x) mean(x) > 1e-5, TRUE)
     RA.tax <- cbind(as.data.frame(tax_table(RA)), as.data.frame(otu_table(RA)))
     write.xlsx(RA.tax, 'Genus.RA.xlsx', sheetName = "Genus.RA",
