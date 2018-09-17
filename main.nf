@@ -195,6 +195,7 @@ process rPart {
     library(xlsx)
     library(dplyr)
     library(vegan)
+    library(data.table)
     mothur.data <- import_mothur(mothur_shared_file = '$shared_file', mothur_constaxonomy_file = '$tax_file')
     colnames(tax_table(mothur.data)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus")
     aba <- data.table(t(otu_table(mothur.data)))
