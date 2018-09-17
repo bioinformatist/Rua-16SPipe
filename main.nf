@@ -43,9 +43,9 @@
 // }
 
 // params.inputdir = "$baseDir/data/mixed"
-db_align = "$workflow.launchDir/params.db_align"
-db_tax = "$workflow.launchDir/params.db_tax"
-db_subset = "$workflow.launchDir/params.db_subset"
+db_align = "$workflow.launchDir/$params.db_align"
+db_tax = "$workflow.launchDir/$params.db_tax"
+db_subset = "$workflow.launchDir/$params.db_subset"
 params.outdir = 'results'
 // params.mothur_prefix = 'hehe'
 
